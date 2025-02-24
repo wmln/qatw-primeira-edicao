@@ -7,14 +7,14 @@ const connection = {
 
 const queueName = 'twoFactorQueue' //pega no redis
 
-const queue = new Queue(queueName, {connection})
+const queue = new Queue(queueName, { connection })
 
-export const getJob = async () =>{
+export const getJob = async () => {
     const jobs = await queue.getJobs() // busca todos os jobs
     return jobs[0].data.code
 }
 
-export const cleanJobs = async () =>{
-    await queue.obliterate() // apaga todas as mensagens (jobs) que tem na fila
+export const cleanJobs = async () => {
+    await queue.obliterate({ force: true }) // apaga todas as mensagens (jobs) que tem na fila
 
 }
